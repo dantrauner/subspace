@@ -31,8 +31,12 @@ if [ -z "${NAMESERVER-}" ] ; then
     export NAMESERVER="1.1.1.1"
 fi
 
+if [ -z "${SUBSPACE_WIREGUARD_HOST-}" ] ; then
+    export SUBSPACE_WIREGUARD_HOST="${SUBSPACE_HTTP_HOST}"
+fi
+
 if [ -z "${SUBSPACE_WIREGUARD_PORT-}" ] ; then
-    export SUBSPACE_WIREGUARD_PORT="51820"
+    export SUBSPACE_WIREGUARD_PORT=51820
 fi
 
 export DEBIAN_FRONTEND="noninteractive"
@@ -172,7 +176,8 @@ exec /usr/bin/subspace \
     "--http-insecure=${SUBSPACE_HTTP_INSECURE}" \
     "--backlink=${SUBSPACE_BACKLINK}" \
     "--letsencrypt=${SUBSPACE_LETSENCRYPT}" \
-	"--wg-port=${SUBSPACE_WIREGUARD_PORT}
+    "--wg-host=${SUBSPACE_WIREGUARD_HOST}" \
+    "--wg-port=${SUBSPACE_WIREGUARD_PORT}"
 RUNIT
     chmod +x /etc/sv/subspace/run
 

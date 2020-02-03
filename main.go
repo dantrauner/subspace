@@ -84,8 +84,11 @@ var (
 	// Error page HTML
 	errorPageHTML = `<html><head><title>Error</title></head><body text="orangered" bgcolor="black"><h1>An error has occurred</h1></body></html>`
 
+    // Hostname for the WireGuard endpoint
+	wgHost string
+
     // Port WireGuard server listens on
-	wgPort = 51820
+	wgPort int
 )
 
 func init() {
@@ -98,6 +101,7 @@ func init() {
 	cli.BoolVar(&showVersion, "version", false, "display version and exit")
 	cli.BoolVar(&showHelp, "help", false, "display help and exit")
 	cli.BoolVar(&debug, "debug", false, "debug mode")
+	cli.IntVar(&wgHost, "wg-host", "", "the hostname for the wireguard endpoint")
 	cli.IntVar(&wgPort, "wg-port", 51820, "the port wireguard listens on")
 }
 

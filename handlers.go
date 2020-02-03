@@ -387,19 +387,19 @@ Address = 10.99.97.{{$.Profile.Number}}/22,fd00::10:97:{{$.Profile.Number}}/112
 
 [Peer]
 PublicKey = $(cat server.public)
-Endpoint = {{$.Domain}}:{{$.WgPort}}
+Endpoint = {{$.WgHost}}:{{$.WgPort}}
 AllowedIPs = 0.0.0.0/0, ::/0
 WGCLIENT
 `
 	_, err = bash(script, struct {
 		Datadir string
 		Profile Profile
-		Domain  string
+		WgHost string
 		WgPort int
 	}{
 		datadir,
 		profile,
-		httpHost,
+		wgHost,
 		wgPort,
 	})
 	if err != nil {
